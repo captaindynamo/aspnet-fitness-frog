@@ -52,13 +52,14 @@ namespace Treehouse.FitnessFrog.Controllers
         [HttpPost]
         public ActionResult Add(Entry entry) // MVC Model Binder will recognise all parameters from VIEW "Add.cshtml" and bind it with the MODEL "Entry" object
         {
+
             if (ModelState.IsValid) // ModelState provides an error message or every invalid field entry (as visible in autos panel), then parsed through Model Binder.
             {
                 _entriesRepository.AddEntry(entry);
 
-                // TODO Display the Entries list page
+                return RedirectToAction("Index"); // POST -> REDIRECT -> GET pattern. A View("Index") command will diver to Index but with POST info still lingering for reuse (i.e. refreshing will re-POST).
             }
-            
+
             return View(entry);
         }
 
