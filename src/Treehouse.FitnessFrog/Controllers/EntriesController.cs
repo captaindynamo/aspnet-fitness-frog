@@ -43,8 +43,12 @@ namespace Treehouse.FitnessFrog.Controllers
         {
             var entry = new Entry()
             {
-                Date = DateTime.Today   // Displays a default Today's Date when "Add Entry" is opened
+                Date = DateTime.Today,   // Displays a default Today's Date when "Add Entry" is opened
+                //ActivityId = 2
             };
+
+            ViewBag.ActivitiesSelectListItems = new SelectList(
+                Data.Data.Activities, "Id", "Name");
 
             return View(entry);
         }
@@ -57,8 +61,11 @@ namespace Treehouse.FitnessFrog.Controllers
             {
                 _entriesRepository.AddEntry(entry);
 
-                return RedirectToAction("Index"); // POST -> REDIRECT -> GET pattern. A View("Index") command will diver to Index but with POST info still lingering for reuse (i.e. refreshing will re-POST).
+                return RedirectToAction("Index"); // POST -> REDIRECT -> GET pattern. A View("Index") command will diver to Index but with POST info still lingering for reuse (i.e. a duplicate form submission).
             }
+
+            ViewBag.ActivitiesSelectListItems = new SelectList(
+                Data.Data.Activities, "Id", "Name");
 
             return View(entry);
         }

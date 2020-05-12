@@ -2,9 +2,34 @@
                         @*Allows for strongly typed lambda extension method*@
 @{
     ViewBag.Title = "Add Entry";
+
+    //Method No. 1
+    //var selectListItems = new[]
+    //{
+    //    new SelectListItem() { Value = "1", Text = "Item 1", Selected = false},
+    //    new SelectListItem() { Value = "2", Text = "Item 2", Selected = true}
+    //};
+
+    //Method No. 2
+    //var items = new[]
+    //{
+    //    new { Id = 1, name = "Item 1"},
+    //    new { Id = 2, name = "Item 2" }
+    //};
+
+    //var selectListItems = new SelectList(items, "Id", "Name");
+
 }
 
 <h2>@ViewBag.Title</h2>
+
+        <!-- The selectListTimes code section above create the following-->
+        <!-- MVC PLAN A: Option 2 is not automatically selected since the default value is selected. 
+             MVC PLAN B: ModelState (i.e. selected on screen) values are selected over Model requested (i.e. selected in code afterwards) values -->
+        @*<select>
+                <option value="1">Item 1</option>
+                <option value="2" selected>Item 2</option>
+        </select>*@
 
 @using (Html.BeginForm()) // gotten rid of <form method="post">
 {
@@ -26,7 +51,8 @@
 
             <div class="form-group">
                 @Html.LabelFor(m => m.ActivityId, new { @class = "control-label" })
-                @Html.TextBoxFor(m => m.ActivityId, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.ActivityId, 
+                        (SelectList)ViewBag.ActivitiesSelectListItems, "", new { @class = "form-control" })
             </div>
 
             <div class="form-group">
