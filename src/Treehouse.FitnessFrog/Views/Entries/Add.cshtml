@@ -79,11 +79,20 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Exclude, new { @class = "control-label" })
-                @Html.TextBoxFor(m => m.Exclude, new { @class = "form-control" })
+                <div class="checkbox">
+                    <label> <!-- Label element allows you to click on the TEXT "Exclude" to check/uncheck the checkbox -->
+                        @Html.CheckBoxFor(m => m.Exclude) @Html.DisplayNameFor(m => m.Exclude)
+                    </label>
+                </div>
 
+                <!-- The below code does not work since only when checked does it pass "True" to the Controller. Unticked doesn't pass anything!
+                     MVC uses a double atHTML method which includes a hidden <input> for sending "False" to the Controller
+                
+                    <input id="Exclude" name="Exclude" type="checkbox" value="True" /> Exclude
+                -->
+                
                 @*<label for="Exclude" class="control-label">Exclude</label>
-                    <input type="text" id="Exclude" name="Exclude" class="form-control" value="@(ViewBag.Exclude != null ? ViewBag.Exclude.ToString() : "")" />*@
+                <input type="text" id="Exclude" name="Exclude" class="form-control" value="@(ViewBag.Exclude != null ? ViewBag.Exclude.ToString() : "")" />*@
             </div>
 
         </div>
