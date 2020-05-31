@@ -56,6 +56,12 @@ namespace Treehouse.FitnessFrog.Controllers
         public ActionResult Add(Entry entry) // MVC Model Binder will recognise all parameters from VIEW "Add.cshtml" and bind it with the MODEL "Entry" object
         {
 
+            //Validation Rule: If there aren't any "Duration" field validation errors, then make sure that the duratino is greater than "0"
+            if (ModelState.IsValidField("Duration") && entry.Duration <= 0)
+            {
+                ModelState.AddModelError("Duration", "The Duration field value must be greater than '0'.");
+            }
+            
             if (ModelState.IsValid) // ModelState provides an error message or every invalid field entry (as visible in autos panel), then parsed through Model Binder.
             {
                 _entriesRepository.AddEntry(entry);
