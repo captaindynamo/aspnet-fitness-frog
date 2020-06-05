@@ -56,6 +56,8 @@ namespace Treehouse.FitnessFrog.Controllers
         public ActionResult Add(Entry entry) // MVC Model Binder will recognise all parameters from VIEW "Add.cshtml" and bind it with the MODEL "Entry" object
         {
 
+            // ModelState.AddModelError("", "This is a global message.");       // This is how you add a global message in HttpPost (and not via the cshtml page)
+
             //Validation Rule: If there aren't any "Duration" field validation errors, then make sure that the duration is greater than "0"
             if (ModelState.IsValidField("Duration") && entry.Duration <= 0)
             {
