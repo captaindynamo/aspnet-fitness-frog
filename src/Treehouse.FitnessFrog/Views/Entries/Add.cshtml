@@ -29,21 +29,25 @@
 
 @* @Html.ValidationSummary(true) *@
 
-@Html.ValidationSummary("The following errors have been found:", new { @class = "alert alert-danger"})
 
-@Html.ValidationMessageFor(m => m.ActivityId)
-@Html.ValidationMessageFor(m => m.Duration)
+
+@* @Html.ValidationMessageFor(m => m.Date)  *@ <!-- An individual validation message for Date. But not needed as per the ValidationSummary, as per below-->
+@* @Html.ValidationMessageFor(m => m.ActivityId) *@ <!-- Individual validation message for ActivityID. Not needed as per below-->
+@* @Html.ValidationMessageFor(m => m.Duration) *@ <!-- Individual validation message for Duration. Not needed as per below-->
 
 <!-- The selectListTimes code section above create the following-->
 <!-- MVC PLAN A: Option 2 is not automatically selected since the default value is selected.
      MVC PLAN B: ModelState (i.e. selected on screen) values are selected over Model requested (i.e. selected in code afterwards) values -->
 @*<select>
-            <option value="1">Item 1</option>
-            <option value="2" selected>Item 2</option>
+                <option value="1">Item 1</option>
+                <option value="2" selected>Item 2</option>
     </select>*@
 
 @using (Html.BeginForm()) // gotten rid of <form method="post">
 {
+
+    @Html.ValidationSummary("The following errors have been found:", new { @class = "alert alert-danger" }) <!-- Separate validation message for m.Date, m.ActivityId or m.Duration is not needed as this ValidationSummary encapsulates ALL validation message! -->
+
     <div class="row">
 
         <div class="col-md-6">
